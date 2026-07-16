@@ -107,7 +107,7 @@ def _render_manuscript_template_download():
     if os.path.exists(essay_data.MANUSCRIPT_TEMPLATE_PATH):
         with open(essay_data.MANUSCRIPT_TEMPLATE_PATH, "rb") as f:
             st.download_button(
-                "📄 400字詰め原稿用紙のテンプレートをダウンロード（ノートアプリに読み込んで手書き用）",
+                "📄 800字詰め原稿用紙のテンプレートをダウンロード（ノートアプリに読み込んで手書き用）",
                 data=f.read(),
                 file_name="essay_manuscript_template.pdf",
                 mime="application/pdf",
@@ -184,14 +184,14 @@ def _render_brought_in_theme_section(api_key):
 
 def _render_submission_section(api_key):
     input_mode = st.radio(
-        "提出方法", ["テキスト入力", "写真・PDFをアップロード（400字詰め原稿用紙）"], key="essay_practice_input_mode"
+        "提出方法", ["テキスト入力", "写真・PDFをアップロード（800字詰め原稿用紙）"], key="essay_practice_input_mode"
     )
 
     if input_mode == "テキスト入力":
         text = st.text_area("小論文本文", key="essay_practice_text_input", height=300)
         char_count = len(text)
-        sheets = char_count / 400
-        st.caption(f"{char_count}字 / 400字詰め原稿用紙 約{sheets:.1f}枚相当")
+        sheets = char_count / 800
+        st.caption(f"{char_count}字 / 800字詰め原稿用紙 約{sheets:.1f}枚相当")
         return text if text.strip() else None
 
     st.caption("紙に手書きした写真、またはノートアプリ（GoodNotes等）から書き出したPDF・画像をアップロードしてください（複数ページ可）。")
@@ -231,7 +231,7 @@ def _render_submission_section(api_key):
         height=300,
     )
     char_count = len(edited_text)
-    st.caption(f"{char_count}字 / 400字詰め原稿用紙 約{char_count / 400:.1f}枚相当")
+    st.caption(f"{char_count}字 / 800字詰め原稿用紙 約{char_count / 800:.1f}枚相当")
     st.session_state["essay_practice_ocr_text"] = edited_text
     return edited_text if edited_text.strip() else None
 
